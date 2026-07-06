@@ -1,0 +1,15 @@
+# Example consumer workflow: gate your CI on MCP server reliability.
+# Copy into .github/workflows/ in a repo that ships an MCP server.
+name: MCP reliability
+on: [push, pull_request]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: TimurRakhmatullin86/mcp-drill@v0
+        with:
+          server: "npx -y @modelcontextprotocol/server-filesystem /tmp"
+          # Fail the build if the server mishandles any invalid-input probe:
+          min-error-handling: "1.0"

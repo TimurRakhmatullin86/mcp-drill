@@ -1,0 +1,38 @@
+name: "mcp-drill scan"
+description: "Score an MCP server's fault handling and output-schema hygiene in CI — no LLM required."
+branding:
+  icon: "activity"
+  color: "purple"
+inputs:
+  server:
+    description: "The MCP server command to launch, e.g. 'npx -y @modelcontextprotocol/server-filesystem /tmp'."
+    required: true
+  timeout:
+    description: "Per-request timeout in seconds."
+    required: false
+    default: "30"
+  min-error-handling:
+    description: "Fail the job if the error-handling score is below this fraction (0..1). Empty = never fail."
+    required: false
+    default: ""
+  min-output-schema:
+    description: "Fail the job if output-schema coverage is below this fraction (0..1). Empty = never fail."
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+    - name: Install mcp-drill
+      shell: bash
+      run: pip install --quiet "${{ github.action_path }}[scan]"
+    - name: Scan and gate
+      shell: bash
+      run: |
+        python -m mcp_drill.cli scan --json --timeout "${{ inputs.timeout }}" -- ${{ inputs.server }} > mcp-drill.json
+        python "${{ github.action_path }}/ci/gate.py" mcp-drill.json \
+          --min-error-handling "${{ inputs.min-error-handling }}" \
+          --min-output-schema "${{ inputs.min-output-schema }}" >> "$GITHUB_STEP_SUMMARY"

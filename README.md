@@ -1,0 +1,68 @@
+# mcp-drill
+
+**Fault injection and reliability testing for MCP servers and AI agents.**
+Wrap any Model Context Protocol server in one command; inject timeouts, malformed JSON-RPC,
+truncated and corrupted-but-valid tool outputs; measure whether the server degrades cleanly —
+and whether your agent *notices* or silently acts on the garbage.
+
+```bash
+uvx mcp-drill wrap --faults timeout,corrupt -- npx -y @modelcontextprotocol/server-filesystem /tmp
+```
+
+MCP is JSON-RPC over stdio/SSE with bidirectional notifications, so ordinary HTTP fault-injectors
+and chaos tools don't fit. `mcp-drill` speaks MCP: it sits transparently between an MCP client and
+a backend server and perturbs the traffic, so you can test failure paths in CI without a live LLM.
+
+## Why
+
+Real MCP deployments fail in ways integration tests never cover: a tool times out, a server
+returns a well-formed-but-wrong payload, a response is truncated mid-stream. Most agents were
+never exercised against these paths. `mcp-drill` makes them reproducible:
+
+- 🧪 **Fault injection** — deterministically inject timeouts, malformed/oversized/truncated
+  responses, corrupted-but-schema-valid payloads, dropped tools, and latency.
+- 🎬 **CI-first** — a CLI and a GitHub Action; no live model or API keys required in the loop.
+- 📊 **Reliability scorecard** — a model-free scan that grades how a server responds to bad
+  input and how machine-checkable its tool output contracts are.
+
+## Install
+
+Until the first PyPI release, install from source:
+
+```bash
+pip install "mcp-drill[scan] @ git+https://github.com/TimurRakhmatullin86/mcp-drill"
+```
+
+## Quickstart
+
+```bash
+# wrap a server and inject faults into its responses
+mcp-drill wrap --faults timeout,truncate -- npx -y @modelcontextprotocol/server-everything
+
+# score a server's fault handling and output-schema hygiene (no LLM involved)
+mcp-drill scan -- npx -y @modelcontextprotocol/server-filesystem /tmp
+```
+
+## What it measures (model-free)
+
+The `scan` command is deterministic and involves no language model, so its numbers are properties
+of the server and the protocol — not of whichever agent happens to call it:
+
+1. **Error conformance** — on invalid requests (unknown method, unknown tool, missing required
+   arguments), does the server return a spec-compliant JSON-RPC error, a proper tool error, or
+   does it hang / crash / answer as if nothing was wrong?
+2. **Output-contract coverage** — what fraction of a server's tools declare a machine-checkable
+   `outputSchema` at all? Tools without one give downstream validators nothing to check.
+3. **Output-contract enforceability** — of the tools that declare an `outputSchema`, how many would
+   actually *reject* a corrupted (well-typed but wrong) response? Many declared schemas validate
+   shape only, so a corrupted payload still passes the server's own contract.
+
+## Status
+
+Early development. The proxy/injector core is pure-stdlib; schema scoring uses `jsonschema`
+(the `scan` extra). Install from source until the first PyPI release. Telemetry is **off** —
+the tool never phones home.
+
+## License
+
+Apache-2.0 (see `LICENSE`).

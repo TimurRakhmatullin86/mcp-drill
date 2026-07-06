@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-drill"
+version = "0.0.1"
+description = "Fault injection and reliability scoring for Model Context Protocol (MCP) servers."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Timur Rakhmatullin" }]
+keywords = [
+  "mcp",
+  "model-context-protocol",
+  "fault-injection",
+  "chaos-engineering",
+  "reliability",
+  "testing",
+  "llm",
+  "agents",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = []  # the proxy/injector core is pure-stdlib
+
+[project.optional-dependencies]
+# Schema-conformance scoring needs a JSON Schema validator.
+scan = ["jsonschema>=4.20"]
+dev = ["pytest>=8", "jsonschema>=4.20"]
+
+[project.urls]
+Repository = "https://github.com/TimurRakhmatullin86/mcp-drill"
+Issues = "https://github.com/TimurRakhmatullin86/mcp-drill/issues"
+
+[project.scripts]
+mcp-drill = "mcp_drill.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

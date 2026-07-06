@@ -1,0 +1,771 @@
+{
+  "generated": "2026-07-06T06:22:06Z",
+  "n_servers": 24,
+  "servers": [
+    {
+      "name": "everything",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-servers/everything",
+        "title": "Everything Reference Server",
+        "version": "2.0.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 13,
+      "tools_with_output_schema": 1,
+      "output_schema_coverage": 0.07692307692307693,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 1,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 1.1
+    },
+    {
+      "name": "filesystem",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/tmp"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "secure-filesystem-server",
+        "version": "0.2.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 14,
+      "tools_with_output_schema": 14,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 1,
+      "vacuous_output_schemas": 13,
+      "enforceable_rate": 0.07142857142857142,
+      "corruption_acceptance_rate": 0.9285714285714286,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.7
+    },
+    {
+      "name": "memory",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "memory-server",
+        "version": "0.6.3"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 9,
+      "tools_with_output_schema": 9,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 9,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.6
+    },
+    {
+      "name": "sequential-thinking",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "sequential-thinking-server",
+        "version": "0.2.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 1,
+      "tools_with_output_schema": 1,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 1,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.6
+    },
+    {
+      "name": "desktop-commander",
+      "command": [
+        "npx",
+        "-y",
+        "@wonderwhy-er/desktop-commander"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "desktop-commander",
+        "version": "0.2.43"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 26,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 1.4
+    },
+    {
+      "name": "context7",
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "Context7",
+        "version": "3.2.2",
+        "websiteUrl": "https://context7.com",
+        "description": "Context7 provides up-to-date documentation and code examples for libraries and frameworks.",
+        "icons": [
+          {
+            "src": "https://context7.com/context7-icon-green.png",
+            "mimeType": "image/png"
+          }
+        ]
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 2,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.7
+    },
+    {
+      "name": "mcp-server-chart",
+      "command": [
+        "npx",
+        "-y",
+        "@antv/mcp-server-chart"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-server-chart",
+        "version": "0.8.x"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 27,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "jsonrpc_error",
+        "missing_required_args": "jsonrpc_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 2.0
+    },
+    {
+      "name": "git-mcp-server",
+      "command": [
+        "npx",
+        "-y",
+        "@cyanheads/git-mcp-server"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "@cyanheads/git-mcp-server",
+        "version": "2.15.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 28,
+      "tools_with_output_schema": 28,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 5,
+      "vacuous_output_schemas": 23,
+      "enforceable_rate": 0.17857142857142858,
+      "corruption_acceptance_rate": 0.8214285714285714,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.8
+    },
+    {
+      "name": "mcp-server-commands",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-server-commands"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-server-commands",
+        "version": "0.8.2",
+        "description": "Run commands on this darwin machine"
+      },
+      "protocol_version": "2024-11-05",
+      "n_tools": 1,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "jsonrpc_error",
+        "missing_required_args": "skipped"
+      },
+      "notes": [
+        "no tool declares required arguments; missing-args probe skipped"
+      ],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.5
+    },
+    {
+      "name": "playwright",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp",
+        "--headless"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "Playwright",
+        "version": "1.62.0-alpha-2026-06-29"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 23,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 1.3
+    },
+    {
+      "name": "time",
+      "command": [
+        "uvx",
+        "mcp-server-time"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-time",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 2,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.7
+    },
+    {
+      "name": "fetch",
+      "command": [
+        "uvx",
+        "mcp-server-fetch"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-fetch",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 1,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.6
+    },
+    {
+      "name": "git",
+      "command": [
+        "uvx",
+        "mcp-server-git"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-git",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 12,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.5
+    },
+    {
+      "name": "sqlite",
+      "command": [
+        "uvx",
+        "mcp-server-sqlite",
+        "--db-path",
+        "/tmp/drill.db"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "sqlite",
+        "version": "0.1.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 6,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 0.6666666666666666,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "accepted",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.5
+    },
+    {
+      "name": "duckduckgo",
+      "command": [
+        "uvx",
+        "duckduckgo-mcp-server"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "ddg-search",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 2,
+      "tools_with_output_schema": 2,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 2,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.5
+    },
+    {
+      "name": "calculator",
+      "command": [
+        "uvx",
+        "mcp-server-calculator"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "calculator",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 1,
+      "tools_with_output_schema": 1,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 1,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.4
+    },
+    {
+      "name": "wikipedia",
+      "command": [
+        "uvx",
+        "wikipedia-mcp"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "Wikipedia",
+        "version": "3.4.3"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 22,
+      "tools_with_output_schema": 22,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 22,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 1.0
+    },
+    {
+      "name": "arxiv",
+      "command": [
+        "uvx",
+        "mcp-simple-arxiv"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "arxiv-server",
+        "version": "0.6.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 5,
+      "tools_with_output_schema": 5,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 5,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 5,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 5.0
+    },
+    {
+      "name": "taskmanager",
+      "command": [
+        "npx",
+        "-y",
+        "@kazuph/mcp-taskmanager"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "task-manager-server",
+        "version": "2.0.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 10,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 2.5
+    },
+    {
+      "name": "datetime",
+      "command": [
+        "uvx",
+        "mcp-server-datetime"
+      ],
+      "handshake_ok": false,
+      "server_info": {},
+      "protocol_version": null,
+      "n_tools": 0,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": null,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": null,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": null,
+      "probes": {},
+      "notes": [
+        "initialize failed: server closed stdout; exit=1; stderr:   × No solution found when resolving tool dependencies:\n  ╰─▶ Because mcp-server-datetime was not found in the package registry and\n      you require mcp-server-datetime, we can conclude that your requirements\n      are unsatisfiable."
+      ],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.2
+    },
+    {
+      "name": "nixos",
+      "command": [
+        "uvx",
+        "mcp-nixos"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-nixos",
+        "version": "2.4.3"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 2,
+      "tools_with_output_schema": 2,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 2,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 2,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 2.6
+    },
+    {
+      "name": "pandoc",
+      "command": [
+        "uvx",
+        "mcp-pandoc"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-pandoc",
+        "version": "0.8.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 1,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "skipped"
+      },
+      "notes": [
+        "no tool declares required arguments; missing-args probe skipped"
+      ],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 2.0
+    },
+    {
+      "name": "pubmed",
+      "command": [
+        "uvx",
+        "mcp-simple-pubmed"
+      ],
+      "handshake_ok": false,
+      "server_info": {},
+      "protocol_version": null,
+      "n_tools": 0,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": null,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": null,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": null,
+      "probes": {},
+      "notes": [
+        "initialize failed: server closed stdout; exit=1; stderr: Downloading biopython (2.6MiB)\n Downloaded rapidfuzz\n      Built docopt==0.6.2\n Downloaded metapub\n Downloaded biopython\nInstalled 99 packages in 182ms\n/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/fastmcp/server/auth/providers/jwt.py:10: AuthlibDeprecationWarning: authlib.jose module is deprecated, please use joserfc instead.\nIt will be compatible before version 2.0.0.\n  from authlib.jose import JsonWebKey, JsonWebToken\nTraceback (most recent call last):\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/bin/mcp-simple-pubmed\", line 6, in <module>\n    from mcp_simple_pubmed.__main__ import main\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/mcp_simple_pubmed/__init__.py\", line 6, in <module>\n    from . import server\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/mcp_simple_pubmed/server.py\", line 36, in <module>\n    pubmed_client, fulltext_client = configure_clients()\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/mcp_simple_pubmed/server.py\", line 25, in configure_clients\n    raise ValueError(\"PUBMED_EMAIL environment variable is required\")\nValueError: PUBMED_EMAIL environment variable is required"
+      ],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 3.9
+    },
+    {
+      "name": "youtube-transcript",
+      "command": [
+        "npx",
+        "-y",
+        "@sinco-lab/mcp-youtube-transcript"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-youtube-transcript",
+        "version": "0.0.12",
+        "description": "A server built on the Model Context Protocol (MCP) that enables direct downloading of YouTube video transcripts, supporting AI and video analysis workflows."
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 5,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 1.5
+    }
+  ]
+}

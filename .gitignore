@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# Local pilot outputs may contain large raw captures; keep curated results only.
+studies/**/raw/
+*.local.json
+.DS_Store
