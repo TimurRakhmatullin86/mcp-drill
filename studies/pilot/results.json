@@ -1,6 +1,6 @@
 {
-  "generated": "2026-07-06T06:22:06Z",
-  "n_servers": 24,
+  "generated": "2026-07-06T16:43:34Z",
+  "n_servers": 30,
   "servers": [
     {
       "name": "everything",
@@ -33,7 +33,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 1.1
+      "scan_seconds": 1.6
     },
     {
       "name": "filesystem",
@@ -98,7 +98,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.6
+      "scan_seconds": 0.5
     },
     {
       "name": "sequential-thinking",
@@ -162,7 +162,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 1.4
+      "scan_seconds": 1.6
     },
     {
       "name": "context7",
@@ -174,7 +174,7 @@
       "handshake_ok": true,
       "server_info": {
         "name": "Context7",
-        "version": "3.2.2",
+        "version": "3.2.3",
         "websiteUrl": "https://context7.com",
         "description": "Context7 provides up-to-date documentation and code examples for libraries and frameworks.",
         "icons": [
@@ -202,7 +202,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.7
+      "scan_seconds": 1.4
     },
     {
       "name": "mcp-server-chart",
@@ -234,7 +234,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 2.0
+      "scan_seconds": 6.2
     },
     {
       "name": "git-mcp-server",
@@ -266,7 +266,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.8
+      "scan_seconds": 3.4
     },
     {
       "name": "mcp-server-commands",
@@ -334,7 +334,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 1.3
+      "scan_seconds": 1.2
     },
     {
       "name": "time",
@@ -365,7 +365,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.7
+      "scan_seconds": 1.7
     },
     {
       "name": "fetch",
@@ -396,7 +396,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.6
+      "scan_seconds": 2.4
     },
     {
       "name": "git",
@@ -427,7 +427,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.5
+      "scan_seconds": 1.3
     },
     {
       "name": "sqlite",
@@ -460,7 +460,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.5
+      "scan_seconds": 1.3
     },
     {
       "name": "duckduckgo",
@@ -491,7 +491,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.5
+      "scan_seconds": 1.4
     },
     {
       "name": "calculator",
@@ -522,7 +522,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 0.4
+      "scan_seconds": 1.2
     },
     {
       "name": "wikipedia",
@@ -553,7 +553,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 1.0
+      "scan_seconds": 2.7
     },
     {
       "name": "arxiv",
@@ -584,7 +584,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 5.0
+      "scan_seconds": 40.4
     },
     {
       "name": "taskmanager",
@@ -616,7 +616,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 2.5
+      "scan_seconds": 1.0
     },
     {
       "name": "datetime",
@@ -673,7 +673,7 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 2.6
+      "scan_seconds": 2.5
     },
     {
       "name": "pandoc",
@@ -706,7 +706,7 @@
       ],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 2.0
+      "scan_seconds": 1.5
     },
     {
       "name": "pubmed",
@@ -728,11 +728,11 @@
       "error_handling_score": null,
       "probes": {},
       "notes": [
-        "initialize failed: server closed stdout; exit=1; stderr: Downloading biopython (2.6MiB)\n Downloaded rapidfuzz\n      Built docopt==0.6.2\n Downloaded metapub\n Downloaded biopython\nInstalled 99 packages in 182ms\n/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/fastmcp/server/auth/providers/jwt.py:10: AuthlibDeprecationWarning: authlib.jose module is deprecated, please use joserfc instead.\nIt will be compatible before version 2.0.0.\n  from authlib.jose import JsonWebKey, JsonWebToken\nTraceback (most recent call last):\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/bin/mcp-simple-pubmed\", line 6, in <module>\n    from mcp_simple_pubmed.__main__ import main\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/mcp_simple_pubmed/__init__.py\", line 6, in <module>\n    from . import server\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/mcp_simple_pubmed/server.py\", line 36, in <module>\n    pubmed_client, fulltext_client = configure_clients()\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tim/.cache/uv/archive-v0/TVdE6PvQccA3sbu8/lib/python3.12/site-packages/mcp_simple_pubmed/server.py\", line 25, in configure_clients\n    raise ValueError(\"PUBMED_EMAIL environment variable is required\")\nValueError: PUBMED_EMAIL environment variable is required"
+        "initialize failed: server closed stdout; exit=1; stderr: Installed 99 packages in 180ms\n/Users/tim/.cache/uv/archive-v0/VDw92CLhg8g4UC75/lib/python3.12/site-packages/fastmcp/server/auth/providers/jwt.py:10: AuthlibDeprecationWarning: authlib.jose module is deprecated, please use joserfc instead.\nIt will be compatible before version 2.0.0.\n  from authlib.jose import JsonWebKey, JsonWebToken\nTraceback (most recent call last):\n  File \"/Users/tim/.cache/uv/archive-v0/VDw92CLhg8g4UC75/bin/mcp-simple-pubmed\", line 6, in <module>\n    from mcp_simple_pubmed.__main__ import main\n  File \"/Users/tim/.cache/uv/archive-v0/VDw92CLhg8g4UC75/lib/python3.12/site-packages/mcp_simple_pubmed/__init__.py\", line 6, in <module>\n    from . import server\n  File \"/Users/tim/.cache/uv/archive-v0/VDw92CLhg8g4UC75/lib/python3.12/site-packages/mcp_simple_pubmed/server.py\", line 36, in <module>\n    pubmed_client, fulltext_client = configure_clients()\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tim/.cache/uv/archive-v0/VDw92CLhg8g4UC75/lib/python3.12/site-packages/mcp_simple_pubmed/server.py\", line 25, in configure_clients\n    raise ValueError(\"PUBMED_EMAIL environment variable is required\")\nValueError: PUBMED_EMAIL environment variable is required"
       ],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
-      "scan_seconds": 3.9
+      "scan_seconds": 3.7
     },
     {
       "name": "youtube-transcript",
@@ -765,7 +765,186 @@
       "notes": [],
       "jsonschema_available": true,
       "tool_version": "0.0.1",
+      "scan_seconds": 0.9
+    },
+    {
+      "name": "hackernews",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-hn"
+      ],
+      "handshake_ok": false,
+      "server_info": {},
+      "protocol_version": null,
+      "n_tools": 0,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": null,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": null,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": null,
+      "probes": {},
+      "notes": [
+        "initialize failed: server closed stdout; exit=1; stderr: npm error code E404\nnpm error 404 Not Found - GET https://registry.npmjs.org/mcp-hn - Not found\nnpm error 404\nnpm error 404  The requested resource 'mcp-hn@*' could not be found or you do not have permission to access it.\nnpm error 404\nnpm error 404 Note that you can also install from a\nnpm error 404 tarball, folder, http url, or git url.\nnpm error A complete log of this run can be found in: /Users/tim/.npm/_logs/2026-07-06T16_43_24_770Z-debug-0.log"
+      ],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.6
+    },
+    {
+      "name": "youtube-transcript2",
+      "command": [
+        "npx",
+        "-y",
+        "@kimtaeyoon83/mcp-server-youtube-transcript"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-servers-youtube-transcript",
+        "version": "0.1.0"
+      },
+      "protocol_version": "2024-11-05",
+      "n_tools": 1,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "jsonrpc_error",
+        "missing_required_args": "jsonrpc_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 2.6
+    },
+    {
+      "name": "text-editor",
+      "command": [
+        "uvx",
+        "mcp-text-editor"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "mcp-text-editor",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 2,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
       "scan_seconds": 1.5
+    },
+    {
+      "name": "tree-sitter",
+      "command": [
+        "uvx",
+        "mcp-server-tree-sitter"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "tree_sitter",
+        "version": "1.28.1"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 26,
+      "tools_with_output_schema": 26,
+      "output_schema_coverage": 1.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 26,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": 1.0,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "tool_error",
+        "missing_required_args": "tool_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 2.3
+    },
+    {
+      "name": "requests",
+      "command": [
+        "uvx",
+        "mcp-server-requests"
+      ],
+      "handshake_ok": false,
+      "server_info": {},
+      "protocol_version": null,
+      "n_tools": 0,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": null,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": null,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": null,
+      "probes": {},
+      "notes": [
+        "initialize failed: server closed stdout; exit=1; stderr:   × No solution found when resolving tool dependencies:\n  ╰─▶ Because mcp-server-requests was not found in the package registry and\n      you require mcp-server-requests, we can conclude that your requirements\n      are unsatisfiable."
+      ],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 0.2
+    },
+    {
+      "name": "json-mcp",
+      "command": [
+        "npx",
+        "-y",
+        "@gongrzhe/server-json-mcp"
+      ],
+      "handshake_ok": true,
+      "server_info": {
+        "name": "json",
+        "version": "1.0.0"
+      },
+      "protocol_version": "2025-06-18",
+      "n_tools": 2,
+      "tools_with_output_schema": 0,
+      "output_schema_coverage": 0.0,
+      "enforceable_output_schemas": 0,
+      "vacuous_output_schemas": 0,
+      "enforceable_rate": 0.0,
+      "corruption_acceptance_rate": null,
+      "fastmcp_wrapped_tools": 0,
+      "error_handling_score": 1.0,
+      "probes": {
+        "unknown_method": "jsonrpc_error",
+        "unknown_tool": "jsonrpc_error",
+        "missing_required_args": "jsonrpc_error"
+      },
+      "notes": [],
+      "jsonschema_available": true,
+      "tool_version": "0.0.1",
+      "scan_seconds": 3.2
     }
   ]
 }
