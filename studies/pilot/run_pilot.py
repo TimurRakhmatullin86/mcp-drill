@@ -249,6 +249,16 @@ python studies/pilot/run_pilot.py studies/pilot/servers.json</pre>
     docs.mkdir(exist_ok=True)
     (docs / "index.html").write_text(page, encoding="utf-8")
 
+    # shields.io endpoint badge for the headline number (embeddable anywhere)
+    enf_pct = enforceable / total
+    badge = {
+        "schemaVersion": 1,
+        "label": "MCP output contracts",
+        "message": f"{pct(enforceable)} enforced · {len(started)} servers",
+        "color": "critical" if enf_pct < 0.1 else "important" if enf_pct < 0.5 else "success",
+    }
+    (docs / "badge.json").write_text(json.dumps(badge), encoding="utf-8")
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

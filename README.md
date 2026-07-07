@@ -1,5 +1,7 @@
 # mcp-drill
 
+[![MCP output contracts](https://img.shields.io/endpoint?url=https://timurrakhmatullin86.github.io/mcp-drill/badge.json)](https://timurrakhmatullin86.github.io/mcp-drill/)
+
 **Fault injection and reliability testing for MCP servers and AI agents.**
 Wrap any Model Context Protocol server in one command; inject timeouts, malformed JSON-RPC,
 truncated and corrupted-but-valid tool outputs; measure whether the server degrades cleanly —

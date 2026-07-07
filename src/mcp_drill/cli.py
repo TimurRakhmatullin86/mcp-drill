@@ -51,6 +51,8 @@ def _build_parser() -> argparse.ArgumentParser:
                       help="scan a remote server over Streamable HTTP instead of a stdio command")
     scan.add_argument("--header", action="append", default=[], metavar="K:V",
                       help="extra HTTP header for --url (repeatable), e.g. 'Authorization: Bearer …'")
+    scan.add_argument("--badge", action="store_true",
+                      help="emit a shields.io endpoint badge (JSON) for this server instead of a report")
 
     sub.add_parser("faults", help="list the available fault types")
     sub.add_parser("version", help="print the version")
@@ -130,13 +132,30 @@ def main(argv: list[str] | None = None) -> int:
             print("error: provide a stdio command after `--` or a remote server with --url",
                   file=sys.stderr)
             return 2
-        if args.json:
+        if args.badge:
+            print(json.dumps(_server_badge(score)))
+        elif args.json:
             print(json.dumps(score.to_dict(), indent=2, ensure_ascii=False))
         else:
             _print_report(score)
         return 0
 
     return 2
+
+
+def _server_badge(score: ServerScore) -> dict[str, object]:
+    enf = score.enforceable_rate
+    if not score.handshake_ok or enf is None:
+        message, color = "unknown", "lightgrey"
+    elif enf >= 0.5:
+        message, color = "enforced", "success"
+    elif score.tools_with_output_schema == 0:
+        message, color = "no schema", "critical"
+    elif enf > 0:
+        message, color = f"{enf * 100:.0f}% enforced", "important"
+    else:
+        message, color = "vacuous", "critical"
+    return {"schemaVersion": 1, "label": "mcp output contract", "message": message, "color": color}
 
 
 def _parse_headers(pairs: list[str]) -> dict[str, str]:
