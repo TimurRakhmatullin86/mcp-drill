@@ -45,8 +45,14 @@ pip install "mcp-drill[scan] @ git+https://github.com/TimurRakhmatullin86/mcp-dr
 # wrap a server and inject faults into its responses
 mcp-drill wrap --faults timeout,truncate -- npx -y @modelcontextprotocol/server-everything
 
-# score a server's fault handling and output-schema hygiene (no LLM involved)
+# score a local (stdio) server's fault handling and output-schema hygiene (no LLM involved)
 mcp-drill scan -- npx -y @modelcontextprotocol/server-filesystem /tmp
+
+# score a remote server over Streamable HTTP (add --header for auth if needed)
+mcp-drill scan --url https://mcp.deepwiki.com/mcp
+
+# emit a shields.io badge for a server's output-contract grade
+mcp-drill scan --badge --url https://mcp.deepwiki.com/mcp
 ```
 
 ## What it measures (model-free)
