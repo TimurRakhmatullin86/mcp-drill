@@ -47,6 +47,10 @@ def _build_parser() -> argparse.ArgumentParser:
     scan.add_argument("--json", action="store_true", help="emit the full score as JSON")
     scan.add_argument("--timeout", type=float, default=20.0, help="per-request timeout in seconds")
     scan.add_argument("--name", default=None, help="label for the server in the report")
+    scan.add_argument("--url", default=None,
+                      help="scan a remote server over Streamable HTTP instead of a stdio command")
+    scan.add_argument("--header", action="append", default=[], metavar="K:V",
+                      help="extra HTTP header for --url (repeatable), e.g. 'Authorization: Bearer …'")
 
     sub.add_parser("faults", help="list the available fault types")
     sub.add_parser("version", help="print the version")
@@ -100,11 +104,10 @@ def main(argv: list[str] | None = None) -> int:
         print("\n".join(faults.names()))
         return 0
 
-    if not server_cmd:
-        print("error: provide the server command after `--`", file=sys.stderr)
-        return 2
-
     if args.cmd == "wrap":
+        if not server_cmd:
+            print("error: provide the server command after `--`", file=sys.stderr)
+            return 2
         specs = build_specs(_parse_fault_list(args.faults))
         proxy = FaultProxy(
             server_cmd,
@@ -116,7 +119,17 @@ def main(argv: list[str] | None = None) -> int:
         return proxy.run()
 
     if args.cmd == "scan":
-        score = scan_server(args.name or server_cmd[-1], server_cmd, timeout=args.timeout)
+        if args.url:
+            from .scorecard import scan_http
+
+            score = scan_http(args.name or args.url, args.url,
+                              headers=_parse_headers(args.header), timeout=args.timeout)
+        elif server_cmd:
+            score = scan_server(args.name or server_cmd[-1], server_cmd, timeout=args.timeout)
+        else:
+            print("error: provide a stdio command after `--` or a remote server with --url",
+                  file=sys.stderr)
+            return 2
         if args.json:
             print(json.dumps(score.to_dict(), indent=2, ensure_ascii=False))
         else:
@@ -124,6 +137,15 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     return 2
+
+
+def _parse_headers(pairs: list[str]) -> dict[str, str]:
+    headers: dict[str, str] = {}
+    for pair in pairs:
+        key, _, value = pair.partition(":")
+        if key.strip():
+            headers[key.strip()] = value.strip()
+    return headers
 
 
 if __name__ == "__main__":

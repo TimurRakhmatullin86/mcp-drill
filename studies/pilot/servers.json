@@ -18,15 +18,17 @@
   {"name": "wikipedia",            "command": ["uvx", "wikipedia-mcp"], "timeout": 60},
   {"name": "arxiv",                "command": ["uvx", "mcp-simple-arxiv"], "timeout": 60},
   {"name": "taskmanager",          "command": ["npx", "-y", "@kazuph/mcp-taskmanager"], "timeout": 60},
-  {"name": "datetime",             "command": ["uvx", "mcp-server-datetime"], "timeout": 40},
   {"name": "nixos",                "command": ["uvx", "mcp-nixos"], "timeout": 60},
   {"name": "pandoc",               "command": ["uvx", "mcp-pandoc"], "timeout": 60},
-  {"name": "pubmed",               "command": ["uvx", "mcp-simple-pubmed"], "timeout": 60},
   {"name": "youtube-transcript",   "command": ["npx", "-y", "@sinco-lab/mcp-youtube-transcript"], "timeout": 60},
-  {"name": "hackernews",           "command": ["npx", "-y", "mcp-hn"], "timeout": 60},
   {"name": "youtube-transcript2",  "command": ["npx", "-y", "@kimtaeyoon83/mcp-server-youtube-transcript"], "timeout": 60},
   {"name": "text-editor",          "command": ["uvx", "mcp-text-editor"], "timeout": 40},
   {"name": "tree-sitter",          "command": ["uvx", "mcp-server-tree-sitter"], "timeout": 60},
-  {"name": "requests",             "command": ["uvx", "mcp-server-requests"], "timeout": 40},
-  {"name": "json-mcp",             "command": ["npx", "-y", "@gongrzhe/server-json-mcp"], "timeout": 60}
+  {"name": "json-mcp",             "command": ["npx", "-y", "@gongrzhe/server-json-mcp"], "timeout": 60},
+
+  {"name": "deepwiki (remote)",       "url": "https://mcp.deepwiki.com/mcp",       "timeout": 30},
+  {"name": "microsoft-learn (remote)","url": "https://learn.microsoft.com/api/mcp","timeout": 30},
+  {"name": "huggingface (remote)",    "url": "https://huggingface.co/mcp",         "timeout": 30},
+  {"name": "gitmcp (remote)",         "url": "https://gitmcp.io/docs",             "timeout": 30},
+  {"name": "cloudflare-docs (remote)","url": "https://docs.mcp.cloudflare.com/mcp","timeout": 30}
 ]

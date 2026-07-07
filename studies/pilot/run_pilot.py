@@ -13,7 +13,7 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from mcp_drill.scorecard import scan_server  # noqa: E402
+from mcp_drill.scorecard import scan_http, scan_server  # noqa: E402
 
 HERE = Path(__file__).parent
 
@@ -25,7 +25,11 @@ def main() -> int:
     for s in servers:
         print(f"[{s['name']}] scanning...", file=sys.stderr, flush=True)
         t0 = time.time()
-        score = scan_server(s["name"], s["command"], timeout=s.get("timeout", 60.0))
+        if s.get("url"):
+            score = scan_http(s["name"], s["url"], headers=s.get("headers"),
+                              timeout=s.get("timeout", 60.0))
+        else:
+            score = scan_server(s["name"], s["command"], timeout=s.get("timeout", 60.0))
         dt = round(time.time() - t0, 1)
         row = score.to_dict()
         row["scan_seconds"] = dt
@@ -103,12 +107,12 @@ def _write_scorecard(out: dict) -> None:
                     + (" (SDK-auto-wrapped)" if r["fastmcp_wrapped_tools"] else ""))
     lines += [
         "",
-        "| Server | Started | Tools | Schema coverage | Enforceable | Vacuous-of-declared | Error handling |",
-        "|---|:--:|--:|--:|--:|--:|--:|",
+        "| Server | Transport | Started | Tools | Schema coverage | Enforceable | Vacuous-of-declared | Error handling |",
+        "|---|:--:|:--:|--:|--:|--:|--:|--:|",
     ]
     for r in rows:
         lines.append(
-            f"| `{r['name']}` | {'yes' if r['handshake_ok'] else 'NO'} | "
+            f"| `{r['name']}` | {r.get('transport', 'stdio')} | {'yes' if r['handshake_ok'] else 'NO'} | "
             f"{r['n_tools'] or ''} | {_pct(r['output_schema_coverage'])} | "
             f"{_pct(r['enforceable_rate'])} | {_pct(r['corruption_acceptance_rate'])} | "
             f"{_pct(r['error_handling_score'])} |"

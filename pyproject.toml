@@ -32,7 +32,9 @@ dependencies = []  # the proxy/injector core is pure-stdlib
 [project.optional-dependencies]
 # Schema-conformance scoring needs a JSON Schema validator.
 scan = ["jsonschema>=4.20"]
-dev = ["pytest>=8", "jsonschema>=4.20"]
+# Scanning remote servers over the Streamable-HTTP / SSE transport.
+http = ["httpx>=0.27"]
+dev = ["pytest>=8", "jsonschema>=4.20", "httpx>=0.27"]
 
 [project.urls]
 Repository = "https://github.com/TimurRakhmatullin86/mcp-drill"

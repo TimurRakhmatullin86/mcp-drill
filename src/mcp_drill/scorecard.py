@@ -46,6 +46,7 @@ _VALUE_CONSTRAINTS = {
 class ServerScore:
     name: str
     command: list[str]
+    transport: str = "stdio"
     handshake_ok: bool = False
     server_info: dict[str, Any] = field(default_factory=dict)
     protocol_version: str | None = None
@@ -83,6 +84,7 @@ class ServerScore:
         return {
             "name": self.name,
             "command": self.command,
+            "transport": self.transport,
             "handshake_ok": self.handshake_ok,
             "server_info": self.server_info,
             "protocol_version": self.protocol_version,
@@ -129,8 +131,21 @@ def _probe(server: StdioServer, send, timeout: float) -> str:
 
 
 def scan_server(name: str, command: list[str], timeout: float = 20.0) -> ServerScore:
-    score = ServerScore(name=name, command=command)
-    server = StdioServer(command)
+    """Scan a server launched over stdio (command = the process argv)."""
+    return _scan(ServerScore(name=name, command=command, transport="stdio"),
+                 StdioServer(command), timeout)
+
+
+def scan_http(name: str, url: str, headers: dict[str, str] | None = None,
+              timeout: float = 20.0) -> ServerScore:
+    """Scan a remote server over the Streamable-HTTP transport."""
+    from .http_client import HttpServer
+
+    return _scan(ServerScore(name=name, command=[url], transport="http"),
+                 HttpServer(url, headers), timeout)
+
+
+def _scan(score: ServerScore, server: Any, timeout: float) -> ServerScore:
     try:
         try:
             init = server.initialize(timeout=timeout)
