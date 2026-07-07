@@ -47,7 +47,8 @@ def main() -> int:
     }
     (HERE / "results.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
     _write_scorecard(out)
-    print(f"\nwrote {HERE/'results.json'} and {HERE/'SCORECARD.md'}", file=sys.stderr)
+    _write_html_page(out)
+    print(f"\nwrote {HERE/'results.json'}, {HERE/'SCORECARD.md'} and docs/index.html", file=sys.stderr)
     return 0
 
 
@@ -130,6 +131,123 @@ def _write_scorecard(out: dict) -> None:
         "",
     ]
     (HERE / "SCORECARD.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def _write_html_page(out: dict) -> None:
+    """Render a self-contained scorecard page for GitHub Pages (repo /docs/index.html)."""
+    import html
+
+    rows = out["servers"]
+    started = [r for r in rows if r["handshake_ok"]]
+    total = sum(r["n_tools"] for r in started) or 1
+    with_schema = sum(r["tools_with_output_schema"] for r in started)
+    vacuous = sum(r["vacuous_output_schemas"] for r in started)
+    enforceable = sum(r["enforceable_output_schemas"] for r in started)
+    err_clean = sum(1 for r in started if (r["error_handling_score"] or 0) == 1.0)
+    no_schema = total - with_schema
+
+    def pct(n: int) -> str:
+        return f"{n / total * 100:.0f}%"
+
+    trows = []
+    for r in rows:
+        started_cell = "yes" if r["handshake_ok"] else "no"
+        trows.append(
+            "<tr>"
+            f"<td>{html.escape(r['name'])}</td>"
+            f"<td class=c>{r.get('transport', 'stdio')}</td>"
+            f"<td class=c>{started_cell}</td>"
+            f"<td class=n>{r['n_tools'] or ''}</td>"
+            f"<td class=n>{_pct(r['enforceable_rate'])}</td>"
+            f"<td class=n>{_pct(r['corruption_acceptance_rate'])}</td>"
+            f"<td class=n>{_pct(r['error_handling_score'])}</td>"
+            "</tr>"
+        )
+
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP Reliability Scorecard — mcp-drill</title>
+<meta name="description" content="A model-free reliability scan of popular Model Context Protocol servers: only {pct(enforceable)} of tools declare an output contract that rejects a corrupted response.">
+<style>
+  :root {{ color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#666; --line:#e5e5e5; --accent:#6b3fa0; --card:#faf9fc; }}
+  @media (prefers-color-scheme: dark) {{ :root {{ --bg:#14141a; --fg:#eee; --muted:#9a9aa5; --line:#2a2a33; --accent:#b79ae0; --card:#1c1c24; }} }}
+  * {{ box-sizing:border-box; }}
+  body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }}
+  .wrap {{ max-width:940px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }}
+  h1 {{ font-size:1.9rem; margin:0 0 .3rem; letter-spacing:-.02em; }}
+  .sub {{ color:var(--muted); margin:0 0 2rem; }}
+  .lede {{ font-size:1.35rem; line-height:1.4; margin:0 0 2rem; }}
+  .lede b {{ color:var(--accent); }}
+  .tiles {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin:0 0 2.5rem; }}
+  .tile {{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem; }}
+  .tile .big {{ font-size:2rem; font-weight:700; letter-spacing:-.02em; }}
+  .tile .lbl {{ color:var(--muted); font-size:.85rem; margin-top:.2rem; }}
+  .scroll {{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; }}
+  table {{ border-collapse:collapse; width:100%; font-size:.9rem; }}
+  th,td {{ padding:.5rem .7rem; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }}
+  th {{ position:sticky; top:0; background:var(--card); font-weight:600; }}
+  td.n,th.n {{ text-align:right; font-variant-numeric:tabular-nums; }}
+  td.c,th.c {{ text-align:center; }}
+  tr:last-child td {{ border-bottom:0; }}
+  h2 {{ font-size:1.2rem; margin:2.5rem 0 .6rem; }}
+  code {{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:.1rem .35rem; font-size:.85em; }}
+  pre {{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem; overflow-x:auto; }}
+  a {{ color:var(--accent); }}
+  footer {{ color:var(--muted); font-size:.85rem; margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; }}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>MCP Reliability Scorecard</h1>
+  <p class="sub">A model-free reliability scan of popular Model Context Protocol servers, by
+    <a href="https://github.com/TimurRakhmatullin86/mcp-drill">mcp-drill</a>. Generated {out['generated']}.</p>
+
+  <p class="lede">Across {len(started)} popular MCP servers ({total} tools), only
+    <b>{pct(enforceable)} of tools declare an output contract that would reject a corrupted response.</b>
+    For the rest, schema validation cannot catch a well-typed but wrong result.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="big">{pct(enforceable)}</div><div class="lbl">enforceable contract ({enforceable}/{total} tools)</div></div>
+    <div class="tile"><div class="big">{pct(vacuous)}</div><div class="lbl">vacuous schema ({vacuous}/{total})</div></div>
+    <div class="tile"><div class="big">{pct(no_schema)}</div><div class="lbl">no schema at all ({no_schema}/{total})</div></div>
+    <div class="tile"><div class="big">{err_clean}/{len(started)}</div><div class="lbl">servers handle bad input correctly</div></div>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Server</th><th class=c>Transport</th><th class=c>Started</th><th class=n>Tools</th>
+      <th class=n>Enforceable</th><th class=n>Vacuous</th><th class=n>Error&nbsp;handling</th></tr></thead>
+    <tbody>
+    {''.join(trows)}
+    </tbody>
+  </table>
+  </div>
+
+  <h2>What this measures (no language model involved)</h2>
+  <p>Every number is a property of the server and the protocol, not of any agent. For each tool that
+    declares an <code>outputSchema</code>, we build a payload that keeps the declared structure and
+    types but corrupts every value, then check whether the server's own schema still validates it. A
+    schema that validates the corruption is <em>vacuous</em>; one that rejects it is <em>enforceable</em>.
+    We also send invalid requests to check whether the server returns a proper error.</p>
+
+  <h2>Reproduce</h2>
+  <pre>pip install "mcp-drill[scan] @ git+https://github.com/TimurRakhmatullin86/mcp-drill"
+python studies/pilot/run_pilot.py studies/pilot/servers.json</pre>
+
+  <footer>
+    mcp-drill is open source (Apache-2.0). Server list, raw results, and methodology are in the
+    <a href="https://github.com/TimurRakhmatullin86/mcp-drill">repository</a>.
+  </footer>
+</div>
+</body>
+</html>
+"""
+    docs = HERE.resolve().parents[1] / "docs"  # repo-root/docs
+    docs.mkdir(exist_ok=True)
+    (docs / "index.html").write_text(page, encoding="utf-8")
 
 
 if __name__ == "__main__":

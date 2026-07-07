@@ -13,6 +13,10 @@ MCP is JSON-RPC over stdio/SSE with bidirectional notifications, so ordinary HTT
 and chaos tools don't fit. `mcp-drill` speaks MCP: it sits transparently between an MCP client and
 a backend server and perturbs the traffic, so you can test failure paths in CI without a live LLM.
 
+> **Finding:** across 31 popular MCP servers (including Microsoft Learn, Hugging Face, Cloudflare and
+> DeepWiki), only **3% of tools declare an output contract that would reject a corrupted response**.
+> See the [live scorecard](https://timurrakhmatullin86.github.io/mcp-drill/).
+
 ## Why
 
 Real MCP deployments fail in ways integration tests never cover: a tool times out, a server

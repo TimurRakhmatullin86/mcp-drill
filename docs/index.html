@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP Reliability Scorecard — mcp-drill</title>
+<meta name="description" content="A model-free reliability scan of popular Model Context Protocol servers: only 3% of tools declare an output contract that rejects a corrupted response.">
+<style>
+  :root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#666; --line:#e5e5e5; --accent:#6b3fa0; --card:#faf9fc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14141a; --fg:#eee; --muted:#9a9aa5; --line:#2a2a33; --accent:#b79ae0; --card:#1c1c24; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:940px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }
+  h1 { font-size:1.9rem; margin:0 0 .3rem; letter-spacing:-.02em; }
+  .sub { color:var(--muted); margin:0 0 2rem; }
+  .lede { font-size:1.35rem; line-height:1.4; margin:0 0 2rem; }
+  .lede b { color:var(--accent); }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin:0 0 2.5rem; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem; }
+  .tile .big { font-size:2rem; font-weight:700; letter-spacing:-.02em; }
+  .tile .lbl { color:var(--muted); font-size:.85rem; margin-top:.2rem; }
+  .scroll { overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; }
+  th,td { padding:.5rem .7rem; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }
+  th { position:sticky; top:0; background:var(--card); font-weight:600; }
+  td.n,th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  td.c,th.c { text-align:center; }
+  tr:last-child td { border-bottom:0; }
+  h2 { font-size:1.2rem; margin:2.5rem 0 .6rem; }
+  code { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:.1rem .35rem; font-size:.85em; }
+  pre { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem; overflow-x:auto; }
+  a { color:var(--accent); }
+  footer { color:var(--muted); font-size:.85rem; margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>MCP Reliability Scorecard</h1>
+  <p class="sub">A model-free reliability scan of popular Model Context Protocol servers, by
+    <a href="https://github.com/TimurRakhmatullin86/mcp-drill">mcp-drill</a>. Generated 2026-07-07T06:31:43Z.</p>
+
+  <p class="lede">Across 31 popular MCP servers (265 tools), only
+    <b>3% of tools declare an output contract that would reject a corrupted response.</b>
+    For the rest, schema validation cannot catch a well-typed but wrong result.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="big">3%</div><div class="lbl">enforceable contract (7/265 tools)</div></div>
+    <div class="tile"><div class="big">42%</div><div class="lbl">vacuous schema (110/265)</div></div>
+    <div class="tile"><div class="big">56%</div><div class="lbl">no schema at all (148/265)</div></div>
+    <div class="tile"><div class="big">30/31</div><div class="lbl">servers handle bad input correctly</div></div>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Server</th><th class=c>Transport</th><th class=c>Started</th><th class=n>Tools</th>
+      <th class=n>Enforceable</th><th class=n>Vacuous</th><th class=n>Error&nbsp;handling</th></tr></thead>
+    <tbody>
+    <tr><td>everything</td><td class=c>stdio</td><td class=c>yes</td><td class=n>13</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>filesystem</td><td class=c>stdio</td><td class=c>yes</td><td class=n>14</td><td class=n>7%</td><td class=n>93%</td><td class=n>100%</td></tr><tr><td>memory</td><td class=c>stdio</td><td class=c>yes</td><td class=n>9</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>sequential-thinking</td><td class=c>stdio</td><td class=c>yes</td><td class=n>1</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>desktop-commander</td><td class=c>stdio</td><td class=c>yes</td><td class=n>26</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>context7</td><td class=c>stdio</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>mcp-server-chart</td><td class=c>stdio</td><td class=c>yes</td><td class=n>27</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>git-mcp-server</td><td class=c>stdio</td><td class=c>yes</td><td class=n>28</td><td class=n>18%</td><td class=n>82%</td><td class=n>100%</td></tr><tr><td>mcp-server-commands</td><td class=c>stdio</td><td class=c>yes</td><td class=n>1</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>playwright</td><td class=c>stdio</td><td class=c>yes</td><td class=n>23</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>time</td><td class=c>stdio</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>fetch</td><td class=c>stdio</td><td class=c>yes</td><td class=n>1</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>git</td><td class=c>stdio</td><td class=c>yes</td><td class=n>12</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>sqlite</td><td class=c>stdio</td><td class=c>yes</td><td class=n>6</td><td class=n>0%</td><td class=n>n/a</td><td class=n>67%</td></tr><tr><td>duckduckgo</td><td class=c>stdio</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>calculator</td><td class=c>stdio</td><td class=c>yes</td><td class=n>1</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>wikipedia</td><td class=c>stdio</td><td class=c>yes</td><td class=n>22</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>arxiv</td><td class=c>stdio</td><td class=c>yes</td><td class=n>5</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>taskmanager</td><td class=c>stdio</td><td class=c>yes</td><td class=n>10</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>nixos</td><td class=c>stdio</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>pandoc</td><td class=c>stdio</td><td class=c>yes</td><td class=n>1</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>youtube-transcript</td><td class=c>stdio</td><td class=c>yes</td><td class=n>5</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>youtube-transcript2</td><td class=c>stdio</td><td class=c>yes</td><td class=n>1</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>text-editor</td><td class=c>stdio</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>tree-sitter</td><td class=c>stdio</td><td class=c>yes</td><td class=n>26</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>json-mcp</td><td class=c>stdio</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>deepwiki (remote)</td><td class=c>http</td><td class=c>yes</td><td class=n>3</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>microsoft-learn (remote)</td><td class=c>http</td><td class=c>yes</td><td class=n>3</td><td class=n>0%</td><td class=n>100%</td><td class=n>100%</td></tr><tr><td>huggingface (remote)</td><td class=c>http</td><td class=c>yes</td><td class=n>8</td><td class=n>12%</td><td class=n>0%</td><td class=n>100%</td></tr><tr><td>gitmcp (remote)</td><td class=c>http</td><td class=c>yes</td><td class=n>5</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr><tr><td>cloudflare-docs (remote)</td><td class=c>http</td><td class=c>yes</td><td class=n>2</td><td class=n>0%</td><td class=n>n/a</td><td class=n>100%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>What this measures (no language model involved)</h2>
+  <p>Every number is a property of the server and the protocol, not of any agent. For each tool that
+    declares an <code>outputSchema</code>, we build a payload that keeps the declared structure and
+    types but corrupts every value, then check whether the server's own schema still validates it. A
+    schema that validates the corruption is <em>vacuous</em>; one that rejects it is <em>enforceable</em>.
+    We also send invalid requests to check whether the server returns a proper error.</p>
+
+  <h2>Reproduce</h2>
+  <pre>pip install "mcp-drill[scan] @ git+https://github.com/TimurRakhmatullin86/mcp-drill"
+python studies/pilot/run_pilot.py studies/pilot/servers.json</pre>
+
+  <footer>
+    mcp-drill is open source (Apache-2.0). Server list, raw results, and methodology are in the
+    <a href="https://github.com/TimurRakhmatullin86/mcp-drill">repository</a>.
+  </footer>
+</div>
+</body>
+</html>
