@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mcp-drill vs mcp-scan — contracts vs security</title>
+<meta name="description" content="mcp-drill tests MCP output-contract enforceability (does the schema reject a corrupted response?). mcp-scan tests security. They are complementary, not competitors.">
+<style>
+:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#666; --line:#e5e5e5; --accent:#6b3fa0; --card:#faf9fc; --good:#1a7f37; --warn:#d1242f; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14141a; --fg:#eee; --muted:#9a9aa5; --line:#2a2a33; --accent:#b79ae0; --card:#1c1c24; } }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:940px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+h1{font-size:1.95rem;margin:0 0 .3rem;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0 0 2rem}
+.lede{font-size:1.25rem;line-height:1.45;margin:0 0 1.5rem}
+.badge{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.25rem .7rem;font-size:.85rem;color:var(--muted)}
+.badge b{color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0 2rem}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.25rem}
+.card h3{margin:0 0 .4rem;font-size:1rem}
+.card p{margin:0;color:var(--muted);font-size:.93rem;line-height:1.5}
+.card code{font-size:.85em}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:1rem 0 1.5rem}
+th,td{padding:.65rem .7rem;border:1px solid var(--line);text-align:left}
+th{background:var(--card);font-weight:600}
+td.c{text-align:center}
+tr.hl td{background:var(--card)}
+.yes{color:var(--good);font-weight:600}
+.no{color:var(--warn)}
+.muted{color:var(--muted)}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem;overflow-x:auto;font-size:.9rem}
+code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.1rem .35rem;font-size:.85em}
+a{color:var(--accent)}
+footer{color:var(--muted);font-size:.85rem;margin-top:3rem;border-top:1px solid var(--line);padding-top:1rem}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.15rem .55rem;font-size:.82rem;margin:.15rem .25rem 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p><a href="../">← mcp-drill</a> · <a href="https://github.com/TimurRakhmatullin86/mcp-drill">GitHub</a> · <a href="https://pypi.org/project/mcp-drill/">PyPI</a></p>
+<h1>mcp-drill vs mcp-scan</h1>
+<p class="sub">Contracts vs Security — complementary, not competitors. Use both in CI.</p>
+<p class="lede"><b>mcp-scan</b> asks “can this server be abused?” (prompt injection, exfiltration, tool poisoning).<br>
+<b>mcp-drill</b> asks “can this server be <em>trusted</em> when it returns a result?” — does its declared <code>outputSchema</code> reject a corrupted response, and does it handle bad input cleanly?</p>
+<p><span class="badge"><b>Finding in mcp-drill:</b> 31 servers · 265 tools → only <b>3% enforceable</b> (7/265) — see <a href="../">live scorecard</a></span></p>
+
+<div class="grid">
+<div class="card">
+<h3>🧪 mcp-drill</h3>
+<p><strong>Fault injection + contract scorecard.</strong> Deterministic, model-free, no LLM. Sits between client and server over stdio / Streamable HTTP, injects timeouts, malformed JSON-RPC, truncated & corrupted-but-valid outputs; scores <code>outputSchema</code> enforceability + error conformance.</p>
+<p style="margin-top:.6rem"><span class="pill">contracts</span><span class="pill">reliability</span><span class="pill">CI gate</span></p>
+</div>
+<div class="card">
+<h3>🔒 mcp-scan</h3>
+<p><strong>Security scanner for MCP.</strong> Static + dynamic checks for prompt injection, malicious tool descriptions, credential leaks, permission issues. Great for pre-install vetting. (By <a href="https://github.com/invariantlabs-ai/mcp-scan">Invariant Labs</a>)</p>
+<p style="margin-top:.6rem"><span class="pill">security</span><span class="pill">supply chain</span><span class="pill">pre-install</span></p>
+</div>
+</div>
+
+<h2>At a glance</h2>
+<table>
+<thead><tr><th>Dimension</th><th>mcp-drill</th><th>mcp-scan</th></tr></thead>
+<tbody>
+<tr><td><strong>Question</strong></td><td>Will the server's declared contract catch a wrong result?</td><td>Can the server be tricked into leaking / executing something evil?</td></tr>
+<tr><td><strong>What it measures</strong></td><td><code>outputSchema</code> enforceability (corruption acceptance), error conformance (unknown method / unknown tool / missing args)</td><td>Tool description poisoning, prompt injection, credential exposure, permission scopes</td></tr>
+<tr><td><strong>How</strong></td><td>Live stdio + HTTP probes, actually drives the server, validates corrupted payloads against the server's own schema</td><td>Analyzes server metadata / tool definitions, optional runtime heuristics</td></tr>
+<tr><td><strong>Needs LLM?</strong></td><td class="c"><span class="yes">No</span> — deterministic, reproducible</td><td class="c"><span class="muted">Sometimes</span> (LLM-assisted checks)</td></tr>
+<tr><td><strong>Transport</strong></td><td>stdio + Streamable HTTP (real MCP handshake)</td><td>Static analysis (no live server required)</td></tr>
+<tr><td><strong>When to run</strong></td><td>CI on every PR — gate <code>--min-output-schema</code> / <code>--min-error-handling</code></td><td>Before installing a new MCP server / in marketplace vetting</td></tr>
+<tr><td><strong>Output</strong></td><td>Per-server scorecard, badge JSON, <code>--json</code> gate</td><td>Findings report (HIGH/MEDIUM/LOW)</td></tr>
+<tr class="hl"><td><strong>Use together?</strong></td><td colspan="2" class="c"><strong>Yes —</strong> <code>mcp-scan</code> before you install; <code>mcp-drill</code> in CI after you install. Different risks.</td></tr>
+</tbody>
+</table>
+
+<h2>Why contracts matter (numbers)</h2>
+<p>mcp-drill scanned <strong>31 popular MCP servers (265 tools)</strong> including Microsoft Learn, Hugging Face, Cloudflare, DeepWiki, GitHub MCP — all live, reproducible via <code>mcp-drill scan</code>:</p>
+<ul>
+<li><strong>Enforceable contracts: 3%</strong> (7/265 tools declare a schema that rejects a corrupted-but-well-typed response)</li>
+<li><strong>No schema: 56%</strong> (148/265) — nothing to validate against</li>
+<li><strong>Vacuous schema: 42%</strong> (110/265) — a corrupted payload validates just as readily as a correct one (often the default <code>x-fastmcp-wrap-result</code> from the Python SDK)</li>
+<li><strong>Error handling: 30/31 servers</strong> handle bad input correctly — the protocol's <em>error</em> path is healthy; the <em>success</em> path's contract is not</li>
+</ul>
+<p>This is <em>not</em> what mcp-scan measures. A server can be security-clean and still have vacuous contracts — your agent will silently act on garbage and neither scanner alone covers both risks.</p>
+
+<h2>Try it (1 command)</h2>
+<pre><code># score any MCP server — no LLM, no API key
+pip install "mcp-drill[scan]"          # or: uvx mcp-drill scan -- ...
+mcp-drill scan -- npx -y @modelcontextprotocol/server-filesystem /tmp
+mcp-drill scan --url https://mcp.deepwiki.com/mcp
+mcp-drill scan --json --url https://mcp.deepwiki.com/mcp &gt; mcp-drill.json
+
+# fault-inject in a proxy (deterministic, with seed)
+mcp-drill wrap --faults timeout,truncate,corrupt -- npx -y @modelcontextprotocol/server-everything
+
+# CI gate (GitHub Action)
+# uses: TimurRakhmatullin86/mcp-drill@v0  with:
+#   server: 'npx -y @modelcontextprotocol/server-filesystem /tmp'
+#   min-error-handling: '0.9'   # fail if &lt;90% probes handled cleanly</code></pre>
+
+<h2>Which should I use?</h2>
+<ul>
+<li><strong>Pick mcp-scan</strong> if you are vetting a new server from the internet / marketplace and want to know if its tool descriptions or permissions are exploitable.</li>
+<li><strong>Pick mcp-drill</strong> if you already depend on an MCP server and want to know whether your agent can trust its outputs — and to fail CI when contract hygiene regresses.</li>
+<li><strong>Pick both</strong> for anything production. They answer different questions; together they cover the two ways an MCP deployment fails: <em>the server does something evil</em> vs <em>the server returns something wrong and nobody notices</em>.</li>
+</ul>
+
+<h2>Playground & docs</h2>
+<ul>
+<li><a href="../">Live scorecard</a> — 31 servers, per-tool tiers, reproduce with <code>studies/pilot/run_pilot.py</code></li>
+<li><a href="https://github.com/TimurRakhmatullin86/mcp-drill/blob/main/METHODOLOGY.md">METHODOLOGY.md</a> — exact definition of “vacuous vs enforceable”, probe classification, reproducibility</li>
+<li><a href="https://github.com/TimurRakhmatullin86/mcp-drill">GitHub</a> · <a href="https://pypi.org/project/mcp-drill/">PyPI</a> · <code>pip install mcp-drill[scan]</code></li>
+</ul>
+
+<footer>
+<code>mcp-drill</code> is Apache-2.0, telemetry off. The scan is model-free and deterministic — every number is a property of the server, not of an LLM. Questions? <a href="https://github.com/TimurRakhmatullin86/mcp-drill/issues">Open an issue</a>.
+</footer>
+</div>
+</body>
+</html>

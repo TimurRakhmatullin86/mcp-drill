@@ -33,11 +33,14 @@ never exercised against these paths. `mcp-drill` makes them reproducible:
 
 ## Install
 
-Until the first PyPI release, install from source:
-
 ```bash
-pip install "mcp-drill[scan] @ git+https://github.com/TimurRakhmatullin86/mcp-drill"
+pip install mcp-drill[scan]        # or: pipx install mcp-drill[scan]
+uvx mcp-drill scan -- --help       # no install, run once
+npm i -g mcp-drill                 # shim: prints version + points to PyPI
 ```
+
+[![PyPI](https://img.shields.io/pypi/v/mcp-drill)](https://pypi.org/project/mcp-drill/)
+[![Downloads](https://img.shields.io/pypi/dm/mcp-drill)](https://pypistats.org/packages/mcp-drill)
 
 ## Quickstart
 
@@ -72,8 +75,9 @@ of the server and the protocol — not of whichever agent happens to call it:
 ## Status
 
 Early development. The proxy/injector core is pure-stdlib; schema scoring uses `jsonschema`
-(the `scan` extra). Install from source until the first PyPI release. Telemetry is **off** —
-the tool never phones home.
+(the `scan` extra). Telemetry is **off** — the tool never phones home.
+See [vs mcp-scan](https://timurrakhmatullin86.github.io/mcp-drill/vs-mcp-scan/) for how
+`mcp-drill` (contract compliance) differs from `mcp-scan` (security).
 
 ## License
 

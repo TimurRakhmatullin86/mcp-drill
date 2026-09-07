@@ -65,11 +65,14 @@
     declares an <code>outputSchema</code>, we build a payload that keeps the declared structure and
     types but corrupts every value, then check whether the server's own schema still validates it. A
     schema that validates the corruption is <em>vacuous</em>; one that rejects it is <em>enforceable</em>.
-    We also send invalid requests to check whether the server returns a proper error.</p>
+    We also send invalid requests to check whether the server returns a proper error.
+    See <a href="vs-mcp-scan/">mcp-drill vs mcp-scan</a> for how this differs from security scanning.</p>
 
   <h2>Reproduce</h2>
-  <pre>pip install "mcp-drill[scan] @ git+https://github.com/TimurRakhmatullin86/mcp-drill"
-python studies/pilot/run_pilot.py studies/pilot/servers.json</pre>
+  <pre>pip install "mcp-drill[scan]"
+python studies/pilot/run_pilot.py studies/pilot/servers.json
+# or scan a single server:
+uvx mcp-drill scan -- npx -y @modelcontextprotocol/server-filesystem /tmp</pre>
 
   <footer>
     mcp-drill is open source (Apache-2.0). Server list, raw results, and methodology are in the
