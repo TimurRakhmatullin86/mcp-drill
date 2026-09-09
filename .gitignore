@@ -12,3 +12,14 @@ dist/
 studies/**/raw/
 *.local.json
 .DS_Store
+
+# Secrets
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log

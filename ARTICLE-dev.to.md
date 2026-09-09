@@ -110,7 +110,7 @@ Gate in CI — GitHub Action (no LLM, no API key):
 - **If you consume MCP tools:** don't rely on `outputSchema` presence as safety. Validate semantically downstream or use `mcp-drill wrap` to exercise your agent's failure paths before prod.
 - **If you review MCP proposals:** coverage will trend to 100% as generators spread. Ask for *enforceability*.
 
-Repo: https://github.com/TimurRakhmatullin86/mcp-drill — Apache-2.0, telemetry off, 14 tests, Python 3.10+. Paper draft in `own/mcp-drill-internal/paper/DRAFT.md` (target arXiv cs.SE). PRs and issues welcome — especially if your server scores differently and you think the harness is wrong (repro is in the repo).
+Repo: https://github.com/TimurRakhmatullin86/mcp-drill — Apache-2.0, telemetry off, 14 tests, Python 3.10+. PRs and issues welcome — especially if your server scores differently and you think the harness is wrong (repro is in the repo).
 
 If you found this useful, a ⭐ on GitHub helps others find it, and running `mcp-drill scan` on your server and opening an issue with the JSON is even better.
 

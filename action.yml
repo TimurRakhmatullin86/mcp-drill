@@ -32,7 +32,7 @@ runs:
     - name: Scan and gate
       shell: bash
       run: |
-        python -m mcp_drill.cli scan --json --timeout "${{ inputs.timeout }}" -- ${{ inputs.server }} > mcp-drill.json
+        python -m mcp_drill.cli scan --json --timeout "${{ inputs.timeout }}" -- "${{ inputs.server }}" > mcp-drill.json
         python "${{ github.action_path }}/ci/gate.py" mcp-drill.json \
           --min-error-handling "${{ inputs.min-error-handling }}" \
           --min-output-schema "${{ inputs.min-output-schema }}" >> "$GITHUB_STEP_SUMMARY"
